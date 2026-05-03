@@ -1,0 +1,19 @@
+services:
+  hermes:
+    image: nousresearch/hermes-agent
+    container_name: hermes
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - ~/.hermes:/opt/data
+    env_file:
+      - .env
+    ports:
+      - "8642:8642"
+    deploy:
+      resources:
+        limits:
+          memory: 6g
+          cpus: "2.0"
+    command: gateway run
